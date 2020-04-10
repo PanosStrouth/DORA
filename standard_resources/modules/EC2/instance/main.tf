@@ -20,28 +20,13 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-variable "instance_type" {
-  type    = string
-  default = "t2.micro"
-}
-
-variable "user_data_script" {
-  type = string
-  default = "bootstraping.sh" 
-}
-
-variable "instance_profile" {
-  type = string
-  default = null
-}
-
 resource "aws_instance" "web" {
   ami           = "${data.aws_ami.ubuntu.id}"
   instance_type = var.instance_type
   iam_instance_profile = var.instance_profile
   key_name = "burdaforward-ec2"
   tags = {
-    Name = "HelloWorld"
+    Name = var.instance_tag_name
   }
   user_data = "${file(var.user_data_script)}"
 }
