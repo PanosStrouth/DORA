@@ -40,5 +40,6 @@ variable "instance_type" {
 #}
 
 module "flask_server" {
-  source = "../../modules/EC2/instance"
+  source = "../../modules/EC2/instance" 
+  instance_tag_name = "FLASKServer"
 }
