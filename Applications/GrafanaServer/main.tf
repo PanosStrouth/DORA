@@ -27,21 +27,11 @@ variable "instance_type" {
 }
 
 
-#resource "aws_instance" "web" {
-#  ami           = "${data.aws_ami.ubuntu.id}"
-#  instance_type = var.instance_type
-#  iam_instance_profile = "${aws_iam_instance_profile.grafana_server_profile.name}"
-#  key_name = "burdaforward-ec2"
-#  tags = {
-#    Name = "HelloWorld"
-#  }
-#  user_data = "${file("bootstraping.sh")}"
-#}
-
 module "grafana_server" {
   source = "../../modules/EC2/instance"
 
   instance_profile = "${aws_iam_instance_profile.grafana_server_profile.name}" 
+  instance_tag_name = "GrafanaServer"
 }
 
 
