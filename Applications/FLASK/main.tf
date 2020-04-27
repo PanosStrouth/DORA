@@ -1,4 +1,3 @@
-Panoss-Air:GrafanaServer panosstrouth$ cat main.tf 
 # Create a new instance of the latest Ubuntu 14.04 on an
 # t2.micro node with an AWS Tag naming it "HelloWorld"
 provider "aws" {
@@ -28,18 +27,9 @@ variable "instance_type" {
 }
 
 
-#resource "aws_instance" "web" {
-#  ami           = "${data.aws_ami.ubuntu.id}"
-#  instance_type = var.instance_type
-#  iam_instance_profile = "${aws_iam_instance_profile.grafana_server_profile.name}"
-#  key_name = "burdaforward-ec2"
-#  tags = {
-#    Name = "HelloWorld"
-#  }
-#  user_data = "${file("bootstraping.sh")}"
-#}
-
 module "flask_server" {
-  source = "../../modules/EC2/instance" 
+  source = "../../modules/EC2/instance"
+ 
   instance_tag_name = "FLASKServer"
 }
+
